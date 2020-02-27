@@ -6,14 +6,20 @@ import ForthComponent from './components/learning-examples/ForthComponent';
 //import logo from './logo.svg';
 import CounterButton from './components/counter/CounterButton'
 import Counter from './components/counter/CounterButton'
+import ToDoApp from './components/todo/ToDoApp'
 import './App.css';
+
 
 
 class  App extends Component {
   render(){
   return (
     <div className="App">
-    <Counter></Counter>
+    {/*<Counter></Counter>*/}
+
+    <ToDoApp>
+
+    </ToDoApp>
     </div>
   );
   }

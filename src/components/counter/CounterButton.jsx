@@ -10,22 +10,35 @@ class Counter extends Component{
             counter:0
         }
         this.increment=this.increment.bind(this);
+        this.decrement=this.decrement.bind(this);
+        this.reset=this.reset.bind(this);
     }
 
     render(){
         return (
           <div className="Counter">
-          <CounterButton by={1} incrementMethod={this.increment}>
+          <CounterButton by={1} incrementMethod={this.increment} decrementMethod={this.decrement}>
           </CounterButton>
-          <CounterButton by={7}incrementMethod={this.increment}>
+          <CounterButton by={7}incrementMethod={this.increment} decrementMethod={this.decrement}>
           </CounterButton>
-          <CounterButton by={17}incrementMethod={this.increment}>
+          <CounterButton by={17}incrementMethod={this.increment} decrementMethod={this.decrement}>
           </CounterButton>
+          <div> <button className="reset" onClick={this.reset}>
+             Reset
+       </button > </div> 
           <span className="count">
               {this.state.counter}
             </span>
           </div>
         );
+        }
+
+        reset(by){
+this.setState(
+    (prevState)=>{
+        return {counter:0}
+    }
+);
         }
         increment(by) {
             //console.log(`increment from parent -${by}`)
@@ -33,6 +46,11 @@ class Counter extends Component{
                 counter:this.state.counter+by
             });
         
+        }
+        decrement(by){
+    this.setState({
+counter:this.state.counter-by
+});
         }
 }
 
@@ -51,6 +69,7 @@ class  CounterButton extends Component{
 
         this.increment= this.increment.bind(this);
         // so i can access it from increment method i need binding
+        this.decrement=this.decrement.bind(this);
     }
 
 render(){
@@ -58,6 +77,9 @@ render(){
         <div className="counter">
             <button onClick={this.increment}>
                 +{this.props.by}
+            </button>
+            <button onClick={this.decrement}>
+                -{this.props.by}
             </button>
             <span className="count">
               {this.state.counter}
@@ -72,13 +94,18 @@ increment() {
     });
 this.props.incrementMethod(this.props.by);
 }
+decrement(){
+    this.setState({
+counter:this.state.counter-this.props.by
+});
+this.props.decrementMethod(this.props.by);
 
-
 }
-CounterButton.defaultProps={
-    by:1
 }
-CounterButton.propTypes={
-    by:propTypes.number
-}
+//CounterButton.defaultProps={
+ //   by:1
+//}
+//CounterButton.propTypes={
+ //   by:propTypes.number
+///}
 export default Counter

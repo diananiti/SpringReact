@@ -9,3 +9,8 @@ button {
     font-size:100 px;
     padding:15px 30px;
 }
+ .reset {
+    background-color:blue;
+    width:150 px
+}
+.body {padding:15px 30px;}
