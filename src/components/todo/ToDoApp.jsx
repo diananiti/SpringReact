@@ -1,14 +1,17 @@
 import React , {Component} from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route , Switch} from 'react-router-dom'
 class ToDoApp extends Component{
     render(){
         return (
             <div className="ToDoApp">
                 <Router>
 <>
+<Switch>
 <Route path="/" exact component ={ LoginComponent} ></Route>
                     <Route path="/login" component={LoginComponent}/>
-                    <Route path="/welcome" component={WelcomeComponent}/>
+                    <Route path="/welcome/:name" component={WelcomeComponent}/>
+                    <Route  component={ErrorComponent}></Route>
+                    </Switch>
 </>
                 </Router>
 
@@ -22,12 +25,15 @@ class ToDoApp extends Component{
 class WelcomeComponent extends Component {
     render(){
         return <div>
-            Welcome
+            Welcome 
+              {this.props.match.params.name}
         </div>
     }
 }
 
-
+function ErrorComponent(){
+    return <div>Error , contact support at jdfkjsfkdsk!</div>
+}
 
 class LoginComponent extends Component{
 
@@ -76,9 +82,13 @@ handleChange(event){
 loginClicked(){
     //
    if(this.state.username==='diana'&& this.state.password==='password') {
-console.log('Succesful')
-this.setState({showSuccessMessage:true})
-this.setState({hasLoginFailed:false})}
+//console.log('Succesful')
+this.props.history.push(`/welcome/${this.state.username}`) //redirecting to welcome after click
+
+
+//this.setState({showSuccessMessage:true})
+//this.setState({hasLoginFailed:false})
+}
 else{
 console.log('Failed')
 this.setState({showSuccessMessage:false})
@@ -94,8 +104,7 @@ this.setState({hasLoginFailed:true})
           {this.state.hasLoginFailed&& <div>Invalid Credentials</div>}
             {/* <showSuccessMessage showSuccessMessage={this.state.showSuccessMessage}></showSuccessMessage> */}
             {this.state.showSuccessMessage && <div> Succesful Login</div>}
-                <div> Invalid Credentials</div>
-                <div> Login Successful</div>
+            
            User Name: <input type="text" name ="username" value= {this.state.username} onChange={this.handleChange}/>
            Password : <input type="password" name="password"value={this.state.password} onChange={this.handleChange}/>
            <button  onClick={this.loginClicked}>
