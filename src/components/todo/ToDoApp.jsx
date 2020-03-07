@@ -72,8 +72,10 @@ this.setState({hasLoginFailed:true})
     render(){
         return(
             <div className="ToDoApp">
-              <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}></ShowInvalidCredentials>
-             <showSuccessMessage showSuccessMessage={this.state.showSuccessMessage}></showSuccessMessage>
+             {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}></ShowInvalidCredentials> */}
+          {this.state.hasLoginFailed&& <div>Invalid Credentials</div>}
+            {/* <showSuccessMessage showSuccessMessage={this.state.showSuccessMessage}></showSuccessMessage> */}
+            {this.state.showSuccessMessage && <div> Succesful Login</div>}
                 <div> Invalid Credentials</div>
                 <div> Login Successful</div>
            User Name: <input type="text" name ="username" value= {this.state.username} onChange={this.handleChange}/>
@@ -87,17 +89,17 @@ this.setState({hasLoginFailed:true})
     
 }
 
-function ShowInvalidCredentials(props){
- if(props.hasLoginFailed){
-return <div>Invalid Credentials</div>
- }  
- return  null;    
-}
+// function ShowInvalidCredentials(props){
+//  if(props.hasLoginFailed){
+// return <div>Invalid Credentials</div>
+//  }  
+//  return  null;    
+// }
 
-function LoginSuccessfull(props){
-    if(props.showSuccessMessage){
-        return <div>Successful Login</div>
-    }
-    return null;
-}
+// function LoginSuccessfull(props){
+//     if(props.showSuccessMessage){
+//         return <div>Successful Login</div>
+//     }
+//     return null;
+// }
 export default ToDoApp
