@@ -18,6 +18,8 @@ class LoginComponent extends Component {
         //this.handlePasswordChange=this.handlePasswordChange.bind(this);
 
         //this is some test
+
+        //second test
         this.handleChange = this.handleChange.bind(this);
         this.loginClicked = this.loginClicked.bind(this);
     }
