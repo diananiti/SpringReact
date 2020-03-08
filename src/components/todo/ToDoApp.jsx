@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import AuthentificationService from './AuthentificationService.js'
-
+import AuthenticatedRoute from './AuthenticatedRoute.jsx'
 class ToDoApp extends Component {
     render() {
         return (
@@ -12,9 +12,9 @@ class ToDoApp extends Component {
                         <Switch>
                             <Route path="/" exact component={LoginComponent} ></Route>
                             <Route path="/login" component={LoginComponent} />
-                            <Route path="/todos" component={ListToDosComponent} />
-                            <Route path="/welcome/:name" component={WelcomeComponent} />
-                            <Route path="/logout" component={LogoutComponent} />
+                            <AuthenticatedRoute path="/todos" component={ListToDosComponent} />
+                            <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent} />
+                            <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                             <Route component={ErrorComponent}></Route>
                         </Switch>
                         <FooterComponent></FooterComponent>
@@ -32,6 +32,9 @@ class ToDoApp extends Component {
 
 class HeaderComponent extends Component {
     render() {
+        const isUserLoggedIn = AuthentificationService.isUserLoggedIn();
+        console.log(isUserLoggedIn);
+
         return (
             <header>
                 <nav className="navbar-expand-md navbar-dark  bg-dark">
@@ -39,21 +42,21 @@ class HeaderComponent extends Component {
                         <a href="http://www.google.com" className="navbar=brand">something</a>
                     </div>
                     <ul className="navbar-nav">
-                        <li ><Link className="nav-link" to="/welcome/diana">Home</Link>
+                        {isUserLoggedIn && <li ><Link className="nav-link" to="/welcome/diana">Home</Link>
 
-                        </li>
-                        <li ><Link className="nav-link" to="/todos">Todos</Link>
+                        </li>}
+                        {isUserLoggedIn && <li ><Link className="nav-link" to="/todos">Todos</Link>
 
-                        </li>
+                        </li>}
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         <li ><Link className="nav-link" to="/login">Login</Link>
 
                         </li>
-                        <li ><Link className="nav-link" to="/logout" onClick={AuthentificationService.logout}>Logout</Link>
-                        {/* mapping on click event to this method call , not the method  which means no () is neccessary*/}
+                        {isUserLoggedIn && <li ><Link className="nav-link" to="/logout" onClick={AuthentificationService.logout}>Logout</Link>
+                            {/* mapping on click event to this method call , not the method  which means no () is neccessary*/}
 
-                        </li>
+                        </li>}
                     </ul>
                 </nav>
             </header>
@@ -79,7 +82,7 @@ class LogoutComponent extends Component {
                 <h1>
                     You are logged out
               </h1>
-                <div classname="container">Thank you </div>
+                <div className="container">Thank you </div>
             </div>
         )
     }
@@ -110,7 +113,7 @@ class ListToDosComponent extends Component {
                         <thead>
                             <tr>
 
-                                
+
                                 <th>description</th>
                                 <th>is comepleted</th>
                                 <th>targetDate</th>
@@ -119,8 +122,8 @@ class ListToDosComponent extends Component {
                         </thead>
                         <tbody>
                             {this.state.todos.map(
-                                todos => <tr>
-                                  
+                                todos => <tr key={todos.id}>
+
                                     <td>
                                         {todos.description}
                                     </td>
@@ -212,7 +215,7 @@ class LoginComponent extends Component {
         //
         if (this.state.username === 'diana' && this.state.password === 'password') {
             //console.log('Succesful')
-            AuthentificationService.registerSuccessfulLogin(this.state.username,this.state.password);//pass in the username and password
+            AuthentificationService.registerSuccessfulLogin(this.state.username, this.state.password);//pass in the username and password
             this.props.history.push(`/welcome/${this.state.username}`) //redirecting to welcome after click
 
 
