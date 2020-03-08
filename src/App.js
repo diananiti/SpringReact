@@ -9,6 +9,8 @@ import Counter from './components/counter/CounterButton'
 import ToDoApp from './components/todo/ToDoApp'
 import './App.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 class  App extends Component {
