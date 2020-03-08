@@ -50,7 +50,8 @@ class HeaderComponent extends Component {
                         <li ><Link className="nav-link" to="/login">Login</Link>
 
                         </li>
-                        <li ><Link className="nav-link" to="/logout">Logout</Link>
+                        <li ><Link className="nav-link" to="/logout" onClick={AuthentificationService.logout}>Logout</Link>
+                        {/* mapping on click event to this method call , not the method  which means no () is neccessary*/}
 
                         </li>
                     </ul>
