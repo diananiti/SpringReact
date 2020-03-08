@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import {BrowserRouter as Router, Route , Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route , Switch,Link} from 'react-router-dom'
 class ToDoApp extends Component{
     render(){
         return (
@@ -31,9 +31,9 @@ super(props)
 this.state={
    todos:
    [
-   { id:1,description:'Learn Mathemathics'},
-   { id:2,description:'Learn Information Modelling'},
-   { id:3,description:'Learn Physics'},
+   { id:1,description:'Learn Mathemathics',done:false, targetDate: new Date()},
+   { id:2,description:'Learn Information Modelling',done:false, targetDate: new Date()},
+   { id:3,description:'Learn Physics',done:false, targetDate: new Date()},
    ]
 }
 }
@@ -54,6 +54,12 @@ this.state={
                 <th>
                 description
                 </th>
+                <th>
+                    is comepleted
+                </th>
+                <th>
+                targetDate
+                </th>
             </id>
         </tr>
     </thead>
@@ -65,6 +71,12 @@ this.state={
             </td>
             <td>
             {todos.description}
+            </td>
+            <td>
+            {todos.done.toString()}
+            </td>
+            <td>
+            {todos.targetDate.toString()}
             </td>
         </tr>
         )}
@@ -79,7 +91,7 @@ class WelcomeComponent extends Component {
     render(){
         return <div>
             Welcome 
-              {this.props.match.params.name}
+              {this.props.match.params.name}. You can manage your todos <Link to="/todos">here</Link>
         </div>
     }
 }
