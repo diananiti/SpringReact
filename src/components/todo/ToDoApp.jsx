@@ -8,8 +8,10 @@ class ToDoApp extends Component{
 <>
 <Switch>
 <Route path="/" exact component ={ LoginComponent} ></Route>
-                    <Route path="/login" component={LoginComponent}/>
+                 <Route path="/login" component={LoginComponent}/> 
+                 <Route path="/todos" component={ListToDosComponent}/> 
                     <Route path="/welcome/:name" component={WelcomeComponent}/>
+                   
                     <Route  component={ErrorComponent}></Route>
                     </Switch>
 </>
@@ -20,6 +22,57 @@ class ToDoApp extends Component{
 </WelcomeComponent>*/}
             </div>
         )
+    }
+}
+
+class ListToDosComponent extends Component {
+constructor(props){
+super(props)
+this.state={
+   todos:
+   [
+   { id:1,description:'Learn Mathemathics'},
+   { id:2,description:'Learn Information Modelling'},
+   { id:3,description:'Learn Physics'},
+   ]
+}
+}
+    render(){
+        
+        return (
+            
+       
+         <div>
+         <h1>List  Todos</h1> 
+  <table>
+    <thead>
+        <tr>
+            <id>
+                <th>
+                    id
+                </th>
+                <th>
+                description
+                </th>
+            </id>
+        </tr>
+    </thead>
+    <tbody>
+        {this.state.todos.map(
+            todos=> <tr>
+            <td>
+            {todos.id}
+            </td>
+            <td>
+            {todos.description}
+            </td>
+        </tr>
+        )}
+        
+    </tbody>
+</table> 
+
+         </div>) 
     }
 }
 class WelcomeComponent extends Component {
