@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import AuthentificationService from './AuthentificationService.js'
+
 class ToDoApp extends Component {
     render() {
         return (
@@ -209,6 +211,7 @@ class LoginComponent extends Component {
         //
         if (this.state.username === 'diana' && this.state.password === 'password') {
             //console.log('Succesful')
+            AuthentificationService.registerSuccessfulLogin(this.state.username,this.state.password);//pass in the username and password
             this.props.history.push(`/welcome/${this.state.username}`) //redirecting to welcome after click
 
 
