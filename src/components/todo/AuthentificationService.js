@@ -1,4 +1,4 @@
-class AuthentificationService {
+class AuthentificationService{
 
 registerSuccessfulLogin(username,password){
     console.log("registered successfully");
@@ -18,4 +18,4 @@ isUserLoggedIn(){
 
 }
 
-export default new AuthentificationService() //new instance of the class AuthentificationService
+export default new AuthentificationService() 

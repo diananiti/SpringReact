@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
-import AuthentificationService from './AuthentificationService.js'
-import { withRouter } from 'react-router';
- 
-
+import { withRouter } from "react-router-dom";
+import React,{Component}from 'react'
+import {Route,Redirect} from 'react-router-dom'
+import AuthentificationService from "./AuthentificationService.js"
+import { BrowserRouter as Router, Switch, Link } from 'react-router-dom'
 class HeaderComponent extends Component {
+
+
     render() {
         const isUserLoggedIn = AuthentificationService.isUserLoggedIn();
         console.log(isUserLoggedIn);
@@ -39,9 +40,4 @@ class HeaderComponent extends Component {
         )
     }
 }
-
 export default withRouter(HeaderComponent);
-
-//To ensure that header menus are updated whenever 
-//the router is called i wrap HeaderComponent 
-//with a call to withRouter.
