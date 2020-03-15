@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './CounterButton.css'
-import propTypes from 'prop-types';
+//import propTypes from 'prop-types';
 
 class Counter extends Component{
 
