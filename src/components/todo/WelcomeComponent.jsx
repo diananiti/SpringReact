@@ -7,6 +7,10 @@ class WelcomeComponent extends Component {
     constructor(props){
         super(props)
         this.retrieveWelcomeMessage=this.retrieveWelcomeMessage.bind(this)
+        this.handleSuccessfulResponse=this.handleSuccessfulResponse.bind(this)
+        this.state={
+            welcomeMessage: ''
+        }
     }
     render() {
         return (
@@ -24,16 +28,25 @@ class WelcomeComponent extends Component {
              className="btn btn-success"
              >Get Wecome Message</button>
                 </div>
+                <div className="constainer">
+                 {this.state.welcomeMessage}
+                </div>
             </>
         )
     }
 retrieveWelcomeMessage(){
 
- HelloWorldService.executeHelloWorldService()
- .then(response=>console.log(response)) //if the call is successfull
+ HelloWorldService.executeHelloWorldBeanService()
+ .then(response=>this.handleSuccessfulResponse(response)) //if the call is successfull
  //.catch()  //if the call is not successfull
 
 
     }
+
+handleSuccessfulResponse(response){
+    this.state.welcomeMessage=response.data.message;
+    this.setState({welocmeMessage: response.data.message})
+}
+
 }
 export default WelcomeComponent

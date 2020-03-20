@@ -5,7 +5,7 @@ import AuthentificationService from "./AuthentificationService.js"
 class LoginComponent extends Component {
 
 
-
+//some coment
     constructor(props) {//any properties are passed on through super class constructor
         super(props);
         this.state = {
