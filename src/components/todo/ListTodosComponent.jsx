@@ -5,6 +5,7 @@ import ToDoDataService from '../../api/services/ToDoDataService.js'
  import AuthentificationService from './AuthentificationService.js'
 class ListToDosComponent extends Component {
     constructor(props) {
+        console.log('constructor')
         super(props)
         this.state = {
             todos:
@@ -16,7 +17,20 @@ class ListToDosComponent extends Component {
             ]
         }
     }
+
+    //lifecycle
+componentWillUnmount(){
+    console.log("componentUnmountMount")
+}
+
+shouldComponentUpdate(nextProps,nextState){
+    console.log('shouldComponentUpdate')
+    console.log(nextProps)
+    console.log(nextState)
+    return false;
+}
     componentDidMount(){
+        console.log("componentDidMount")
         let username=AuthentificationService.getLoggedInUserName();
         ToDoDataService.retrieveAllTodos(username)
         .then(
@@ -31,7 +45,7 @@ response=>{this.setState({todos:response.data})
     
 
     render() {
-
+console.log("its rendering")
         return (
 
 
