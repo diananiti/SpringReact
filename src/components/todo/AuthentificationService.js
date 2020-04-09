@@ -15,6 +15,11 @@ isUserLoggedIn(){
     return true;
     //i will use this true/false to enable/disable the link
 }
+getLoggedInUserName(){
+    let user=sessionStorage.getItem('authenticatedUser');
+    if(user===null)return null;
+    return user;
+}
 
 }
 

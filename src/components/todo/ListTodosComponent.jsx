@@ -1,19 +1,35 @@
 
 import React,{Component}from 'react'
-import {Route,Redirect} from 'react-router-dom'
-import AuthentificationService from './AuthentificationService.js'
+import ToDoDataService from '../../api/services/ToDoDataService.js'
+// import {Route,Redirect} from 'react-router-dom'
+ import AuthentificationService from './AuthentificationService.js'
 class ListToDosComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             todos:
                 [
-                    { id: 1, description: 'Learn Mathemathics', done: false, targetDate: new Date() },
-                    { id: 2, description: 'Learn Information Modelling', done: false, targetDate: new Date() },
-                    { id: 3, description: 'Learn Physics', done: false, targetDate: new Date() },
-                ]
+                //     { id: 1, description: 'Learn Mathemathics', done: false, targetDate: new Date() },
+                //     { id: 2, description: 'Learn Information Modelling', done: false, targetDate: new Date() },
+                //     { id: 3, description: 'Learn Physics', done: false, targetDate: new Date() },
+                // 
+            ]
         }
     }
+    componentDidMount(){
+        let username=AuthentificationService.getLoggedInUserName();
+        ToDoDataService.retrieveAllTodos(username)
+        .then(
+response=>{this.setState({todos:response.data})
+    //console.log(response);
+}
+
+        ) 
+         //if its successfull
+    }
+
+    
+
     render() {
 
         return (
